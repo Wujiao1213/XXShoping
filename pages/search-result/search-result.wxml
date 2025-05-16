@@ -1,0 +1,41 @@
+<!-- pages/search-result/search-result.wxml -->
+<view class="container">
+  <!-- 搜索框 -->
+  <view class="search-box">
+    <input 
+      value="{{keyword}}" 
+      placeholder="请输入商品名称" 
+      bindinput="onSearchInput"
+      bindconfirm="onSearchConfirm"
+    />
+    <button class="search-btn" bindtap="doSearch">搜索</button>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="result-list">
+    <block wx:if="{{productList.length > 0}}">
+      <view 
+        class="product-item" 
+        wx:for="{{productList}}" 
+        wx:key="_id"
+        bindtap="navigateToDetail"
+        data-id="{{item._id}}"
+      >
+        <image class="product-image" src="{{item.image}}"></image>
+        <view class="product-info">
+          <text class="product-name">{{item.name}}</text>
+          <text class="product-price">￥{{item.price}}</text>
+          <text class="product-stock">库存：{{item.stock}}</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- 无结果提示 -->
+    <block wx:else>
+      <view class="empty-tips">
+        <image src="/images/empty.png" mode="aspectFit"></image>
+        <text>没有找到相关商品</text>
+      </view>
+    </block>
+  </view>
+</view>

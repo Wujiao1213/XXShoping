@@ -1,0 +1,54 @@
+<view class="container">
+  <form bindsubmit="submitForm">
+    <!-- 用户名 -->
+    <view class="form-item">
+      <input name="username" placeholder="请输入用户名"/>
+    </view>
+
+    <!-- 性别选择器 -->
+    <view class="form-item">
+      <picker 
+        mode="selector" 
+        range="{{genders}}" 
+        value="{{genderIndex}}" 
+        bindchange="genderChange"
+      >
+        <view>性别：{{genderIndex !== -1 ? genders[genderIndex] : '请选择性别'}}</view>
+      </picker>
+    </view>
+
+    <!-- 日期选择器 -->
+    <view class="form-item">
+      <picker 
+        mode="date" 
+        value="{{date}}" 
+        start="1900-01-01" 
+        end="{{currentDate}}" 
+        bindchange="dateChange"
+      >
+        <view>生日：{{date || '请选择出生日期'}}</view>
+      </picker>
+    </view>
+
+    <!-- 时间选择器 -->
+    <view class="form-item">
+      <picker mode="time" value="{{time}}" bindchange="timeChange">
+        <view>注册时间：{{time || '请选择时间'}}</view>
+      </picker>
+    </view>
+
+    <!-- 城市选择器 -->
+    <view class="form-item">
+      <picker mode="region" bindchange="regionChange">
+        <view>地区：{{region.length ? region.join(' ') : '请选择地区'}}</view>
+      </picker>
+    </view>
+
+    <!-- Switch组件 -->
+    <view class="form-item">
+      <switch checked="{{isChecked}}" bindchange="switchChange"/> 同意协议
+    </view>
+
+    <button type="primary" form-type="submit">提交注册</button>
+  </form>
+</view>
